@@ -1,0 +1,26 @@
+<% if flash[:notice] %>
+ <%= flash[:notice] %>
+<% else %>
+<div class="container">
+  <div id="topbar">
+    <ul style="list-style-type: none">
+      <li id="l"><img src="http://res.cloudinary.com/demo/image/fetch/w_0.5/https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="crop"</li>
+      <li id="l">
+        <input type="search" class="form-control" value="<%= @query %>">
+      </li>
+      <li id="l"><button>search</button>
+      </li>
+    </ul>
+  </div>
+
+<div id="search">
+<% for x in @search_data do%>
+  <div id="result">
+  <h4><a href="#"> <%= x.url.title %></h4> 
+  <p id="link"><%= x.url.url %><span class="glyphicon glyphicon-triangle-bottom" id="gsize"></span></p>
+  <p id="summary"><%= x.url.description %></p> 
+  </div>
+</div>
+<% end %>
+<% link_to "back", home_path %>
+<% end %>

@@ -1,0 +1,13 @@
+<div class="search">
+  <div class="logo">
+    <img src="http://www.thelogofactory.com/wp-content/uploads/2015/09/fixed-google-logo-font.png" />
+  </div>
+  <%= form_tag('/home/search', method: :post) do %>
+	<%= text_field_tag 'query',nil, class:'search-bar' %>
+  <div class="search-nav">
+    <div class="search-button">
+      <a href="#"><button type="submit">Google Search</button></a>
+      <% end %>
+    </div>
+  </div>
+</div>
