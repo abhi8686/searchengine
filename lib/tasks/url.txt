@@ -1,1 +1,3 @@
-http://www.wordstream.com/website-keywords
+http://www.gembiz.co.uk/page68.html
+http://www.subr.edu/
+http://stackoverflow.com/questions/4190797/how-can-i-remove-the-string-n-from-within-a-ruby-string

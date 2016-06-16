@@ -16,17 +16,24 @@ namespace :scrapper do
 	  Url.destroy_all
 	  Search.destroy_all
 	  common_words = common_words.to_set
-  	File.open("#{File.dirname(__FILE__)}/url.txt", "r") do |f|
+	  print File.dirname(__FILE__)
+  	File.open(File.dirname(__FILE__) + '/url.txt', "r") do |f|
   		f.each_line do |line|
-  			
-    		doc = Nokogiri::HTML(open(line))
+  			print line
+    		doc = Nokogiri::HTML(open(line.strip))
     		meta_desc = doc.css("meta[name='description']").first 
-				description = meta_desc['content']
+				
+				if meta_desc
+					description = meta_desc['content'] 
+				else
+					description = ''
+				end
 				title = doc.css('title').text
 				url = Url.create(url: line, description: description, title: title)
 				meta_desc = doc.css("meta[name='keywords']").first 
-				keywords = meta_desc['content']  
-				keywords = keywords.split
+				keywords = meta_desc['content']  if meta_desc
+				keywords = keywords.split if keywords
+
 				# keywords.split.each do |i|
 				# 	Search.create(url: line, keyword: i, count: 10)
 				# end
@@ -42,7 +49,7 @@ namespace :scrapper do
   					k = k.to_set.to_a
   				end
 				end
-				minimum_support = 5
+				minimum_support = 2
 				k.each do |i|
 					z=0
 					e.each do |j|
@@ -51,13 +58,18 @@ namespace :scrapper do
 						end
 					end
 
-					if (z.to_f/e.count)*100 > 5
-						if !keywords.include?(i)
-							Search.create(url: url, keyword: i, count: z)
+					if (z.to_f/e.count)*100 > 2
+						if keywords
+							if !keywords.include?(i)
+								Search.create(url: url, keyword: i, count: z)
+							else
+								keywords - [i]
+								Search.create(url: url, keyword: i, count: z)
+							end
 						else
-							keywords - [i]
 							Search.create(url: url, keyword: i, count: z)
 						end
+
 					end
 				end
   		end

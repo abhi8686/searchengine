@@ -16,7 +16,7 @@
 <div id="search">
 <% for x in @search_data do%>
   <div id="result">
-  <h4><a href="#"> <%= x.url.title %></h4> 
+  <h4><a href="<%= x.url.url %>"> <%= x.url.title %></h4> 
   <p id="link"><%= x.url.url %><span class="glyphicon glyphicon-triangle-bottom" id="gsize"></span></p>
   <p id="summary"><%= x.url.description %></p> 
   </div>
