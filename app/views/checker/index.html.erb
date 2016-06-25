@@ -1,0 +1,10 @@
+<%= @id %>
+<br>
+<%= @url.url %>
+<br>
+<%= @keywords %>
+<ul>
+<% @search.each do |j| %>
+<li><%= j.keyword %></li>
+<% end %>
+</ul>

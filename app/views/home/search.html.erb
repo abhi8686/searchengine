@@ -6,10 +6,12 @@
     <ul style="list-style-type: none">
       <li id="l"><img src="http://res.cloudinary.com/demo/image/fetch/w_0.5/https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" class="crop"</li>
       <li id="l">
-        <input type="search" class="form-control" value="<%= @query %>">
+       <%= form_tag('/home/search', method: :post) do %>
+          <%= text_field_tag 'query',nil, class:'form-control', value: @query %>
       </li>
-      <li id="l"><button>search</button>
+      <li id="l"><button type="submit">search</button>
       </li>
+      <% end %>
     </ul>
   </div>
 
@@ -18,7 +20,8 @@
   <div id="result">
   <h4><a href="<%= x.url.url %>"> <%= x.url.title %></h4> 
   <p id="link"><%= x.url.url %><span class="glyphicon glyphicon-triangle-bottom" id="gsize"></span></p>
-  <p id="summary"><%= x.url.description %></p> 
+  <p id="summary"><%= x.url.description %></p> <br>
+  <%= link_to "check",checker_index_path(id: x.url.id) %>
   </div>
 </div>
 <% end %>
