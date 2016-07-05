@@ -1,0 +1,20 @@
+----------------------------- how to install all servers -------------------------------------------
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+sudo echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" | tee -a /etc/apt/sources.list.d/10gen.list
+sudo apt-get -y update
+sudo apt-get -y install mongodb-10gen
+apt-get install curl
+gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
+curl -sSL https://get.rvm.io | bash -s stable
+source /etc/profile.d/rvm.sh
+rvm requirements
+gem install rails
+bundle
+rake scrapper:search
+rails s
+
+open localhost:3000
+---------------------------------- how to add urls -------------------------------------
+go to searchengine/lib/task/url.txt   add the url's to be scrapped
+got to searchengine/lib/task/english.txt  to add the english words which should be deleted from search parameters
+--------------------------------------------------------------------------
